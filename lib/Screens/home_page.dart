@@ -62,10 +62,23 @@ class HomePage extends StatelessWidget {
                           "Data ${index + 1}",
                           style: TextStyle(
                             fontSize: 13.sp,
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 10.h,
+                ),
+                child: Text(
+                  "Upcoming Tasks",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.sp,
                   ),
                 ),
               ),
