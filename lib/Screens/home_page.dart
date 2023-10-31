@@ -82,6 +82,51 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+              Theme(
+                data: ThemeData(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                ),
+                child: ExpansionTile(
+                  collapsedTextColor: Colors.white,
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+                  collapsedIconColor: Colors.white,
+                  title: const Text(
+                    "Task 1",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    "Description 1 ",
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                    ),
+                  ),
+                  leading: CircleAvatar(
+                    radius: 22,
+                    backgroundColor: Colors.grey[700],
+                    foregroundColor: Colors.white,
+                    child: const Text("1"),
+                  ),
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: List.generate(
+                          5,
+                          (index) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 15),
+                                child: Text("Data ${index + 1}  : "),
+                              )),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
