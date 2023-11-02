@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
       desktopScaffold: const Scaffold(),
       tabletScaffold: const Scaffold(),
       mobileScaffold: Scaffold(
-        appBar: const CustomAppbar(),
+        appBar: const CustomAppbar(title:"Todo Application"),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: const FloatingActionButtonWidget(),
         body: SingleChildScrollView(

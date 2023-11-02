@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_application/Screens/add_task_page.dart';
 
 class FloatingActionButtonWidget extends StatelessWidget {
   const FloatingActionButtonWidget({super.key});
@@ -10,7 +11,12 @@ class FloatingActionButtonWidget extends StatelessWidget {
       backgroundColor: Colors.grey[900],
       splashColor: Colors.grey[900],
       icon: const Icon(Icons.add),
-      onPressed: () {},
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AddTaskPage(),
+        ),
+      ),
       label: const Text(
         "Add Task",
         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
