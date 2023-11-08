@@ -3,9 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_application/Widgets/custom_appbar.dart';
 
 class AddTaskPage extends StatelessWidget {
-   AddTaskPage({super.key});
+  AddTaskPage({super.key});
 
-  final List<String> category = ["value 1", "value 2", "value 3","value 4"];
+  final List<String> category = ["value 1", "value 2", "value 3", "value 4"];
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  final TextEditingController titlecontroller = TextEditingController();
+  final TextEditingController descriptioncontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -17,75 +20,89 @@ class AddTaskPage extends StatelessWidget {
           vertical: 20.h,
         ),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: "Title",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 15.h),
-              TextFormField(
-                maxLines: 3,
-                decoration: InputDecoration(
-                  hintText: "Description",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10.r),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 15.h),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 10.h,
-                ),
-                child: DropdownButtonFormField(
+          child: Form(
+            key: formkey,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: titlecontroller,
+                  validator: (value) => value == null || value.isEmpty
+                      ? "Please fill this"
+                      : null,
                   decoration: InputDecoration(
+                    label: const Text("Title"),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(10.r),
                       ),
                     ),
                   ),
-                  hint: const Text("Select Category"),
-                  items: category
-                      .map(
-                        (e) => DropdownMenuItem(
-                          value: e,
-                          child: Text(e.toString()),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (value) {},
                 ),
-              ),
-              SizedBox(height: 10.h),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(120.w, 45.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10.r),
+                SizedBox(height: 15.h),
+                TextFormField(
+                  controller: descriptioncontroller,
+                  validator: (value) => value == null || value.isEmpty
+                      ? "Please fill this"
+                      : null,
+                  maxLines: 3,
+                  decoration: InputDecoration(
+                    label: const Text("Description"),
+                    alignLabelWithHint: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10.r),
+                      ),
                     ),
                   ),
                 ),
-                child: Text(
-                  "Submit",
-                  style: TextStyle(
-                    fontSize: 13.5.sp,
-                    fontWeight: FontWeight.w500,
+                SizedBox(height: 15.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.h,
+                  ),
+                  child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.r),
+                        ),
+                      ),
+                    ),
+                    hint: const Text("Select Category"),
+                    items: category
+                        .map(
+                          (e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(e.toString()),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {},
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: 10.h),
+                ElevatedButton(
+                  onPressed: () {
+                    if (formkey.currentState!.validate()) {}
+                  },
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(120.w, 45.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10.r),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "Submit",
+                    style: TextStyle(
+                      fontSize: 13.5.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
