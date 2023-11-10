@@ -6,21 +6,19 @@ class FloatingActionButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
+    return FloatingActionButton(
       enableFeedback: false,
-      backgroundColor: Colors.grey[900],
+      backgroundColor: const Color.fromARGB(255, 47, 47, 47),
       splashColor: Colors.grey[900],
-      icon: const Icon(Icons.add),
+      tooltip: "Add Task",
       onPressed: () => Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const AddTaskPage(),
         ),
       ),
-      label: const Text(
-        "Add Task",
-        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-      ),
+      child: const Icon(Icons.add),
+     
     );
   }
 }
