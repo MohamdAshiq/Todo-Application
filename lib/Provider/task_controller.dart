@@ -8,6 +8,12 @@ class TaskController extends ChangeNotifier {
     _upcomingTasks.add(taskModel);
     notifyListeners();
   }
+
+ void deleteTask(int index){
+  _upcomingTasks.removeAt(index);
+  notifyListeners();
+ }
+
 }
 
 class TaskModel {
