@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/Provider/task_controller.dart';
+import 'package:todo_application/Screens/add_task_page.dart';
 import 'package:todo_application/Widgets/custom_appbar.dart';
 import 'package:todo_application/Widgets/floating_action_button_widget.dart';
 import 'package:todo_application/responsive_layout.dart';
@@ -13,6 +15,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const List<IconData> categoryIcons = [
+      Icons.person,
+      CupertinoIcons.book_fill,
+      Icons.work,
+      CupertinoIcons.heart_fill,
+      Icons.more_horiz
+    ];
     return ResponsiveLayout(
       desktopScaffold: const Scaffold(),
       tabletScaffold: const Scaffold(),
@@ -44,7 +53,7 @@ class HomePage extends StatelessWidget {
                   height: 100.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: AddTaskPage.category.length,
                     itemBuilder: (context, index) => Padding(
                       padding: EdgeInsets.all(8.0.h),
                       child: Column(
@@ -58,12 +67,16 @@ class HomePage extends StatelessWidget {
                               borderRadius: BorderRadius.all(
                                 Radius.circular(8.r),
                               ),
-                              color: Colors.grey[700],
+                              color: const Color.fromARGB(255, 65, 65, 65),
                             ),
-                            child: const Icon(Icons.category),
+                            child: Icon(
+                              categoryIcons[index],
+                              size: 23,
+                              color: Colors.white,
+                            ),
                           ),
                           Text(
-                            "Data ${index + 1}",
+                            AddTaskPage.category[index].toString(),
                             style: TextStyle(
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w500,

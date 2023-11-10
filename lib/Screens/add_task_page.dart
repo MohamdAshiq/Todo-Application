@@ -8,12 +8,14 @@ import 'package:todo_application/Widgets/custom_appbar.dart';
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
 
+  static const List<String> category = ["Personal", "Study", "Homework", "Health","Other "];
+
   @override
   State<AddTaskPage> createState() => _AddTaskPageState();
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
-  final List<String> category = ["value 1", "value 2", "value 3", "value 4"];
+  
 
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
@@ -85,7 +87,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                     ),
                     hint: const Text("Select Category"),
-                    items: category
+                    items: AddTaskPage.category
                         .map(
                           (e) => DropdownMenuItem(
                             value: e,
