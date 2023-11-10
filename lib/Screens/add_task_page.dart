@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_application/Provider/task_controller.dart';
 import 'package:todo_application/Widgets/custom_appbar.dart';
 
-class AddTaskPage extends StatelessWidget {
-  AddTaskPage({super.key});
+class AddTaskPage extends StatefulWidget {
+  const AddTaskPage({super.key});
 
+  @override
+  State<AddTaskPage> createState() => _AddTaskPageState();
+}
+
+class _AddTaskPageState extends State<AddTaskPage> {
   final List<String> category = ["value 1", "value 2", "value 3", "value 4"];
+
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
   final TextEditingController titlecontroller = TextEditingController();
+
   final TextEditingController descriptioncontroller = TextEditingController();
+  String? selectedCategory;
 
   @override
   Widget build(BuildContext context) {
+    final TaskController controller = Provider.of(context, listen: false);
     return Scaffold(
       appBar: const CustomAppbar(title: "Add Task"),
       body: Padding(
@@ -61,6 +74,9 @@ class AddTaskPage extends StatelessWidget {
                     vertical: 10.h,
                   ),
                   child: DropdownButtonFormField(
+                    validator: (value) => value == null || value.isEmpty
+                        ? "Please select a category"
+                        : null,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
@@ -77,13 +93,36 @@ class AddTaskPage extends StatelessWidget {
                           ),
                         )
                         .toList(),
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        selectedCategory = value.toString();
+                      });
+                    },
+                    value: selectedCategory,
                   ),
                 ),
                 SizedBox(height: 10.h),
                 ElevatedButton(
                   onPressed: () {
-                    if (formkey.currentState!.validate()) {}
+                    if (formkey.currentState!.validate()) {
+                      controller.addTask(
+                        TaskModel(
+                          taskTitle: titlecontroller.text,
+                          description: descriptioncontroller.text,
+                          category: selectedCategory.toString(),
+                          time: DateFormat('hh:mm a dd/MM/yyyy').format(
+                            DateTime.now(),
+                          ),
+                        ),
+                      );
+                      showsnackbar();
+                      titlecontroller.clear();
+                      descriptioncontroller.clear();
+                      setState(() {
+                        selectedCategory=null;
+                      });
+                      Navigator.pop(context);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(120.w, 45.h),
@@ -103,6 +142,22 @@ class AddTaskPage extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void showsnackbar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: const Color.fromARGB(255, 41, 41, 41),
+        content: Text(
+          "Item Added Succesfully..!!",
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+            fontSize: 15.sp,
           ),
         ),
       ),

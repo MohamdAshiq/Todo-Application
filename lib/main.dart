@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_application/Provider/task_controller.dart';
 import 'package:todo_application/Screens/home_page.dart';
 
 void main() {
@@ -17,11 +19,19 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return MaterialApp(
-          title: "Todo Application",
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData.dark(useMaterial3: true),
-          home: const HomePage(),
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => TaskController(),
+            ),
+            
+          ],
+          child: MaterialApp(
+            title: "Todo Application",
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData.dark(useMaterial3: true),
+            home: const HomePage(),
+          ),
         );
       },
     );

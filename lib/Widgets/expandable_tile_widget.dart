@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_application/Provider/task_controller.dart';
 
 class ExpandableTileWidget extends StatelessWidget {
   const ExpandableTileWidget({super.key, required this.index});
@@ -7,6 +10,7 @@ class ExpandableTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TaskController controller = Provider.of(context, listen: false);
     return Theme(
       data: ThemeData(
         splashColor: Colors.transparent,
@@ -18,13 +22,13 @@ class ExpandableTileWidget extends StatelessWidget {
         iconColor: Colors.white,
         collapsedIconColor: Colors.white,
         title: Text(
-          "Task ${index + 1}",
+          controller.upcomingTasks[index].taskTitle,
           style: const TextStyle(
             fontWeight: FontWeight.w500,
           ),
         ),
-        subtitle:  Text(
-          "Description ${index+1} ",
+        subtitle: Text(
+          controller.upcomingTasks[index].description,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontWeight: FontWeight.w400,
@@ -35,22 +39,59 @@ class ExpandableTileWidget extends StatelessWidget {
           radius: 22,
           backgroundColor: Colors.grey[700],
           foregroundColor: Colors.white,
-          child:  Text("${index+1}"),
+          child: Text("${index + 1}"),
         ),
         children: [
           Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: List.generate(
-              5,
-              (index) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: Text("Data ${index + 1}  : "),
-              ),
-            ),
-          )
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ReusableTextWidget(
+                  label: "Title",
+                  itemName: controller.upcomingTasks[index].taskTitle,
+                ),
+                ReusableTextWidget(
+                  label: "Description",
+                  itemName: controller.upcomingTasks[index].description,
+                ),
+                ReusableTextWidget(
+                  label: "Category",
+                  itemName: controller.upcomingTasks[index].category,
+                ),
+                ReusableTextWidget(
+                  label: "Time Added",
+                  itemName: controller.upcomingTasks[index].time,
+                ),
+              ])
         ],
+      ),
+    );
+  }
+}
+
+class ReusableTextWidget extends StatelessWidget {
+  const ReusableTextWidget({
+    super.key,
+    required this.label,
+    required this.itemName,
+  });
+
+  final String label;
+  final String itemName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.w,
+        vertical: 5.h,
+      ),
+      child: Text(
+        "$label : $itemName",
+        style: TextStyle(
+          fontSize: 13.sp,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }

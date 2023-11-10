@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_application/Provider/task_controller.dart';
 import 'package:todo_application/Widgets/custom_appbar.dart';
 import 'package:todo_application/Widgets/floating_action_button_widget.dart';
 import 'package:todo_application/responsive_layout.dart';
@@ -15,7 +17,7 @@ class HomePage extends StatelessWidget {
       desktopScaffold: const Scaffold(),
       tabletScaffold: const Scaffold(),
       mobileScaffold: Scaffold(
-        appBar: const CustomAppbar(title:"Todo Application"),
+        appBar: const CustomAppbar(title: "Todo Application"),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: const FloatingActionButtonWidget(),
         body: SingleChildScrollView(
@@ -85,12 +87,29 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Column(
-                  children: List.generate(
-                    10,
-                    (index) => ExpandableTileWidget(index: index,),
-                  ),
-                )
+                Consumer<TaskController>(
+                  builder: (context, value, child) =>
+                      value.upcomingTasks.isNotEmpty
+                          ? Column(
+                              children: List.generate(
+                                value.upcomingTasks.length,
+                                (index) => ExpandableTileWidget(
+                                  index: index,
+                                ),
+                              ),
+                            )
+                          : SizedBox(
+                              height: 250.h,
+                              child: Center(
+                                child: Text(
+                                  "No Upcoming Tasks",
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                ),
               ],
             ),
           ),

@@ -14,7 +14,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
       onPressed: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => AddTaskPage(),
+          builder: (context) => const AddTaskPage(),
         ),
       ),
       label: const Text(
