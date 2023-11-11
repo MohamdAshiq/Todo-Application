@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/Provider/task_controller.dart';
 import 'package:todo_application/Screens/add_task_page.dart';
+import 'package:todo_application/Screens/category_page.dart';
 import 'package:todo_application/Widgets/custom_appbar.dart';
 import 'package:todo_application/Widgets/floating_action_button_widget.dart';
 import 'package:todo_application/responsive_layout.dart';
@@ -56,33 +57,43 @@ class HomePage extends StatelessWidget {
                     itemCount: AddTaskPage.category.length,
                     itemBuilder: (context, index) => Padding(
                       padding: EdgeInsets.all(8.0.h),
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 5),
-                            width: 50.w,
-                            height: 50.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(8.r),
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => CategoryPage(
+                              title: AddTaskPage.category[index],
+                              index: index,
+                            ),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              width: 50.w,
+                              height: 50.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(8.r),
+                                ),
+                                color: const Color.fromARGB(255, 65, 65, 65),
                               ),
-                              color: const Color.fromARGB(255, 65, 65, 65),
+                              child: Icon(
+                                categoryIcons[index],
+                                size: 23,
+                                color: Colors.white,
+                              ),
                             ),
-                            child: Icon(
-                              categoryIcons[index],
-                              size: 23,
-                              color: Colors.white,
+                            Text(
+                              AddTaskPage.category[index].toString(),
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                          Text(
-                            AddTaskPage.category[index].toString(),
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
