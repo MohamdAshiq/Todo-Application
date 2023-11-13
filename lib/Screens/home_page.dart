@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_application/Hive/db_functions.dart';
 import 'package:todo_application/Provider/task_controller.dart';
 import 'package:todo_application/Screens/add_task_page.dart';
 import 'package:todo_application/Screens/category_page.dart';
@@ -11,8 +12,19 @@ import 'package:todo_application/responsive_layout.dart';
 
 import '../Widgets/expandable_tile_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    DatabaseFunctions.getTask(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

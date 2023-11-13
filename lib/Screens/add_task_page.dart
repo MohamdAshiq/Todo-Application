@@ -2,21 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_application/Hive/db_functions.dart';
+import 'package:todo_application/Hive/task_model.dart';
 import 'package:todo_application/Provider/task_controller.dart';
 import 'package:todo_application/Widgets/custom_appbar.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
 
-  static const List<String> category = ["Personal", "Study", "Homework", "Health","Other "];
+  static const List<String> category = [
+    "Personal",
+    "Study",
+    "Homework",
+    "Health",
+    "Other "
+  ];
 
   @override
   State<AddTaskPage> createState() => _AddTaskPageState();
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
-  
-
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   final TextEditingController titlecontroller = TextEditingController();
@@ -25,8 +31,14 @@ class _AddTaskPageState extends State<AddTaskPage> {
   String? selectedCategory;
 
   @override
+  void dispose() {
+    titlecontroller.dispose();
+    descriptioncontroller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final TaskController controller = Provider.of(context, listen: false);
     return Scaffold(
       appBar: const CustomAppbar(title: "Add Task"),
       body: Padding(
@@ -107,21 +119,22 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ElevatedButton(
                   onPressed: () {
                     if (formkey.currentState!.validate()) {
-                      controller.addTask(
-                        TaskModel(
-                          taskTitle: titlecontroller.text,
-                          description: descriptioncontroller.text,
-                          category: selectedCategory.toString(),
-                          time: DateFormat('hh:mm a dd/MM/yyyy').format(
-                            DateTime.now(),
+                      DatabaseFunctions.addTask(
+                          TaskModel(
+                            taskTitle: titlecontroller.text,
+                            description: descriptioncontroller.text,
+                            category: selectedCategory.toString(),
+                            time: DateFormat('hh:mm a dd/MM/yyyy').format(
+                              DateTime.now(),
+                            ),
                           ),
-                        ),
-                      );
+                          context);
+
                       showsnackbar();
                       titlecontroller.clear();
                       descriptioncontroller.clear();
                       setState(() {
-                        selectedCategory=null;
+                        selectedCategory = null;
                       });
                       Navigator.pop(context);
                     }

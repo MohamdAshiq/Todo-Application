@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_application/Hive/db_functions.dart';
 import 'package:todo_application/Provider/task_controller.dart';
 
 class ExpandableTileWidget extends StatelessWidget {
@@ -24,7 +25,7 @@ class ExpandableTileWidget extends StatelessWidget {
             motion: const ScrollMotion(),
             children: [
               SlidableAction(
-                onPressed: (context) => controller.deleteTask(index),
+                onPressed: (context) => DatabaseFunctions.deleteTask(index, context),
                 backgroundColor: Colors.transparent,
                 foregroundColor: Colors.redAccent,
                 icon: Icons.delete,

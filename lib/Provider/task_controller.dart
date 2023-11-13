@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_application/Hive/task_model.dart';
 
 class TaskController extends ChangeNotifier {
   final List<TaskModel> _upcomingTasks = [];
@@ -9,23 +10,8 @@ class TaskController extends ChangeNotifier {
     notifyListeners();
   }
 
- void deleteTask(int index){
-  _upcomingTasks.removeAt(index);
-  notifyListeners();
- }
-
-}
-
-class TaskModel {
-  final String taskTitle;
-  final String description;
-  final String category;
-  final String time;
-
-  TaskModel({
-    required this.taskTitle,
-    required this.description,
-    required this.category,
-    required this.time,
-  });
+  void deleteTask(int index) {
+    _upcomingTasks.removeAt(index);
+    notifyListeners();
+  }
 }

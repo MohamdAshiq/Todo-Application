@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_application/Hive/task_model.dart';
 import 'package:todo_application/Provider/task_controller.dart';
 import 'package:todo_application/Screens/home_page.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+  if (!Hive.isAdapterRegistered(TaskModelAdapter().typeId)) {
+    Hive.registerAdapter(TaskModelAdapter());
+  }
+  
   runApp(const MyApp());
 }
 
@@ -24,7 +32,6 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(
               create: (context) => TaskController(),
             ),
-            
           ],
           child: MaterialApp(
             title: "Todo Application",
