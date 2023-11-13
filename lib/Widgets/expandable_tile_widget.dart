@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/Hive/db_functions.dart';
 import 'package:todo_application/Provider/task_controller.dart';
+import 'package:todo_application/Widgets/detail_text_widget.dart';
 
 class ExpandableTileWidget extends StatelessWidget {
   const ExpandableTileWidget({super.key, required this.index});
@@ -25,7 +25,8 @@ class ExpandableTileWidget extends StatelessWidget {
             motion: const ScrollMotion(),
             children: [
               SlidableAction(
-                onPressed: (context) => DatabaseFunctions.deleteTask(index, context),
+                onPressed: (context) =>
+                    DatabaseFunctions.deleteTask(index, context),
                 backgroundColor: Colors.transparent,
                 foregroundColor: Colors.redAccent,
                 icon: Icons.delete,
@@ -52,61 +53,34 @@ class ExpandableTileWidget extends StatelessWidget {
           ),
           leading: CircleAvatar(
             radius: 22,
-            backgroundColor:const Color.fromARGB(255, 65, 65, 65),
+            backgroundColor: const Color.fromARGB(255, 65, 65, 65),
             foregroundColor: Colors.white,
             child: Text("${index + 1}"),
           ),
           children: [
             Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ReusableTextWidget(
-                    label: "Title",
-                    itemName: controller.upcomingTasks[index].taskTitle,
-                  ),
-                  ReusableTextWidget(
-                    label: "Description",
-                    itemName: controller.upcomingTasks[index].description,
-                  ),
-                  ReusableTextWidget(
-                    label: "Category",
-                    itemName: controller.upcomingTasks[index].category,
-                  ),
-                  ReusableTextWidget(
-                    label: "Time Added",
-                    itemName: controller.upcomingTasks[index].time,
-                  ),
-                ])
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                DetailTextWidget(
+                  label: "Title",
+                  itemName: controller.upcomingTasks[index].taskTitle,
+                ),
+                DetailTextWidget(
+                  label: "Description",
+                  itemName: controller.upcomingTasks[index].description,
+                ),
+                DetailTextWidget(
+                  label: "Category",
+                  itemName: controller.upcomingTasks[index].category,
+                ),
+                DetailTextWidget(
+                  label: "Time Added",
+                  itemName: controller.upcomingTasks[index].time,
+                ),
+              ],
+            ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ReusableTextWidget extends StatelessWidget {
-  const ReusableTextWidget({
-    super.key,
-    required this.label,
-    required this.itemName,
-  });
-
-  final String label;
-  final String itemName;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 10.w,
-        vertical: 5.h,
-      ),
-      child: Text(
-        "$label  :  $itemName",
-        style: TextStyle(
-          fontSize: 13.sp,
-          fontWeight: FontWeight.w500,
         ),
       ),
     );

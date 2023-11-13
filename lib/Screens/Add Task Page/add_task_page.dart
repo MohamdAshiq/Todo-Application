@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:todo_application/Hive/db_functions.dart';
 import 'package:todo_application/Hive/task_model.dart';
-import 'package:todo_application/Provider/task_controller.dart';
 import 'package:todo_application/Widgets/custom_appbar.dart';
 
 class AddTaskPage extends StatefulWidget {

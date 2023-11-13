@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_application/Hive/task_model.dart';
 import 'package:todo_application/Provider/task_controller.dart';
 
-class DatabaseFunctions {
+class DatabaseFunctions extends ChangeNotifier {
   static Future<void> addTask(TaskModel taskModel, BuildContext context) async {
     final TaskController controller = Provider.of(context, listen: false);
     final db = await Hive.openBox<TaskModel>('tasks');
