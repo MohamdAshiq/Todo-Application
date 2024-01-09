@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_application/Hive/db_functions.dart';
 import 'package:todo_application/Hive/task_model.dart';
@@ -40,9 +39,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
     return Scaffold(
       appBar: const CustomAppbar(title: "Add Task"),
       body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 10.w,
-          vertical: 20.h,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 20,
         ),
         child: SingleChildScrollView(
           child: Form(
@@ -54,45 +53,45 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   validator: (value) => value == null || value.isEmpty
                       ? "Please fill this"
                       : null,
-                  decoration: InputDecoration(
-                    label: const Text("Title"),
+                  decoration: const InputDecoration(
+                    label: Text("Title"),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(10.r),
+                        Radius.circular(10),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 15.h),
+                const SizedBox(height: 15),
                 TextFormField(
                   controller: descriptioncontroller,
                   validator: (value) => value == null || value.isEmpty
                       ? "Please fill this"
                       : null,
                   maxLines: 3,
-                  decoration: InputDecoration(
-                    label: const Text("Description"),
+                  decoration: const InputDecoration(
+                    label: Text("Description"),
                     alignLabelWithHint: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(10.r),
+                        Radius.circular(10),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 15.h),
+                const SizedBox(height: 15),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.h,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
                   ),
                   child: DropdownButtonFormField(
                     validator: (value) => value == null || value.isEmpty
                         ? "Please select a category"
                         : null,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(10.r),
+                          Radius.circular(10),
                         ),
                       ),
                     ),
@@ -113,7 +112,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     value: selectedCategory,
                   ),
                 ),
-                SizedBox(height: 10.h),
+                const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
                     if (formkey.currentState!.validate()) {
@@ -138,17 +137,17 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    fixedSize: Size(120.w, 45.h),
-                    shape: RoundedRectangleBorder(
+                    fixedSize: const Size(120, 45),
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(10.r),
+                        Radius.circular(10),
                       ),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Submit",
                     style: TextStyle(
-                      fontSize: 13.5.sp,
+                      fontSize: 13.5,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -163,14 +162,14 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   void showsnackbar() {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: const Color.fromARGB(255, 41, 41, 41),
+      const SnackBar(
+        backgroundColor: Color.fromARGB(255, 41, 41, 41),
         content: Text(
           "Item Added Succesfully..!!",
           style: TextStyle(
             fontWeight: FontWeight.w500,
             color: Colors.white,
-            fontSize: 15.sp,
+            fontSize: 15,
           ),
         ),
       ),

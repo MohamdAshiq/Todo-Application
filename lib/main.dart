@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/Hive/task_model.dart';
@@ -22,25 +21,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 780),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, child) {
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(
-              create: (context) => TaskController(),
-            ),
-          ],
-          child: MaterialApp(
-            title: "Todo Application",
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData.dark(useMaterial3: true),
-            home: const HomePage(),
-          ),
-        );
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => TaskController(),
+        ),
+      ],
+      child: MaterialApp(
+        title: "Todo Application",
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark(useMaterial3: true),
+        home: const HomePage(),
+      ),
     );
   }
 }

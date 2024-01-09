@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_application/Screens/Add%20Task%20Page/add_task_page.dart';
 import 'package:todo_application/Screens/Category%20Page/category_page.dart';
 
@@ -19,25 +18,25 @@ class CategorySection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(
-            vertical: 10.h,
+            vertical: 10,
           ),
           child: Text(
             "Category",
             style: TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: 18.sp,
+              fontSize: 18,
             ),
           ),
         ),
         SizedBox(
-          height: 100.h,
+          height: 100,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: AddTaskPage.category.length,
             itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.all(8.h),
+              padding: const EdgeInsets.all(8),
               child: GestureDetector(
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
@@ -52,13 +51,13 @@ class CategorySection extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 5),
-                      width: 50.w,
-                      height: 50.h,
-                      decoration: BoxDecoration(
+                      width: 50,
+                      height: 50,
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(8.r),
+                          Radius.circular(8),
                         ),
-                        color: const Color.fromARGB(255, 65, 65, 65),
+                        color: Color.fromARGB(255, 65, 65, 65),
                       ),
                       child: Icon(
                         categoryIcons[index],
@@ -68,8 +67,8 @@ class CategorySection extends StatelessWidget {
                     ),
                     Text(
                       AddTaskPage.category[index].toString(),
-                      style: TextStyle(
-                        fontSize: 13.sp,
+                      style: const TextStyle(
+                        fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

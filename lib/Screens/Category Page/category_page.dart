@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/Provider/task_controller.dart';
 import 'package:todo_application/Widgets/custom_appbar.dart';
@@ -35,24 +34,24 @@ class CategoryPage extends StatelessWidget {
                       backgroundColor: const Color.fromARGB(255, 65, 65, 65),
                       child: Text(
                         "${index + 1}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontSize: 15.sp,
+                          fontSize: 15,
                         ),
                       ),
                     ),
                     title: Text(
                       filteredTasks[index].taskTitle,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 15.sp,
+                        fontSize: 15,
                       ),
                     ),
                     subtitle: Text(
                       filteredTasks[index].description,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w400,
-                        fontSize: 13.sp,
+                        fontSize: 13,
                       ),
                     ),
                   ),
@@ -60,12 +59,12 @@ class CategoryPage extends StatelessWidget {
               },
             );
           } else {
-            return Center(
+            return const Center(
               child: Text(
                 "No items in this category",
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontSize: 15.sp,
+                  fontSize: 15,
                 ),
               ),
             );
